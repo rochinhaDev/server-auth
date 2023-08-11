@@ -1,8 +1,8 @@
 import express from "express";
 import UserModel from "../model/user.model.js";
 import bcrypt from "bcrypt";
-import generateToken from "../config/jwt.conifg.js";
-import isAuth from "./middlewares/isAuth.js";
+import generateToken from "../config/jwt.config.js";
+import isAuth from "../middlewares/isAuth.js";
 const userRouter = express.Router();
 const SALT_ROUNDS = 10; // quanto maior o numero maior a demora para criar a hash
 userRouter.post("/signup", async (req, res) => {

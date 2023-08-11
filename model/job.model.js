@@ -14,5 +14,6 @@ const jobSchema = new Schema({
   state: { type: String, required: true },
   candidates: [{ type: Schema.Types.ObjectId, ref: "User" }],
   select_candidate: { type: Schema.Types.ObjectId, ref: "User" },
+  model: { type: String, enum: ["REMOTO", "HIBRIDO", "PRESENCIAL"] },
 });
 export default model("Job", jobSchema);

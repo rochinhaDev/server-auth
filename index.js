@@ -4,6 +4,8 @@ import express from "express";
 import connectToDB from "./config/db.config.js";
 import userRouter from "./routes/user.routes.js";
 import uploadRouter from "./routes/upload.routes.js";
+import businessRoute from "./routes/business.routes.js";
+import jobRouter from "./routes/job.routes.js";
 
 dotenv.config();
 
@@ -15,6 +17,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/user", userRouter);
+app.use("/business", businessRoute);
+app.use("/job", jobRouter);
 
 app.use("/upload", uploadRouter);
 
