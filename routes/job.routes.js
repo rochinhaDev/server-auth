@@ -24,13 +24,15 @@ jobRouter.post("/create", isAuth, async (req, res) => {
 jobRouter.get("/:id_job", isAuth, async (req, res) => {
   try {
     const id_job = req.params.id_job;
-    const job = await JobModel.findById(id_job).populate({
-      path: "business",
-      select: "name email telefone description",
-    }).populate({
-      path: "candidates",
-      select: "name email telefone",
-    });
+    const job = await JobModel.findById(id_job)
+      .populate({
+        path: "business",
+        select: "name email telefone description",
+      })
+      .populate({
+        path: "candidates",
+        select: "name email telefone",
+      });
     return res.status(200).json(job);
   } catch (error) {
     console.log(error);
