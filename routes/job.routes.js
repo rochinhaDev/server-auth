@@ -55,7 +55,7 @@ jobRouter.get("/all/open", isAuth, async (req, res) => {
     return res.status(500).json(error);
   }
 });
-jobRouter.get("/public/all/open", async (req, res) => {
+jobRouter.get("/all/open/public", async (req, res) => {
   try {
     const jobsOpen = await JobModel.find({
       status: "ABERTA",
