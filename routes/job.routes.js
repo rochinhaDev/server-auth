@@ -127,7 +127,7 @@ jobRouter.post("/apply/:id_job", isAuth, async (req, res) => {
 
     // adicionar o job na array de history_jobs do usuário
     await UserModel.findByIdAndUpdate(id_user, {
-      $push: { history_jobs: id_job },
+      $push: { history: id_job },
     });
 
     return res
@@ -138,7 +138,30 @@ jobRouter.post("/apply/:id_job", isAuth, async (req, res) => {
     return res.status(500).json(error);
   }
 });
+//unapply
+jobRouter.post("/unapply/:id_job", isAuth, async (req, res) => {
+  try {
+    const id_job = req.params.id_job;
+    const id_user = req.auth._id;
 
+    // adicionar o id do user a array candidates
+    await JobModel.findByIdAndUpdate(id_job, {
+      $pull: { candidates: id_user },
+    });
+
+    // adicionar o job na array de history_jobs do usuário
+    await UserModel.findByIdAndUpdate(id_user, {
+      $pull: { history: id_job },
+    });
+
+    return res
+      .status(200)
+      .json({ message: "Candidatura excluida!" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error);
+  }
+});
 jobRouter.post(
   "/approved-candidate/:id_job/:id_user",
   isAuth,
